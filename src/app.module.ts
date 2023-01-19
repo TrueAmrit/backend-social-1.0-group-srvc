@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
@@ -13,13 +14,14 @@ import { MsgBrokerService } from './submodules/backend-social-1.0-rmq/src/module
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'ep-soft-star-756347.us-east-2.aws.neon.tech',
+      host: process.env.DB_HOST,
       port: 5432,
-      username: 'amritgupta1018',
-      password: 'XOMjT6aq3Ibp',
-      database: 'neondb',
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASS,
+      database: process.env.DB,
       entities: [User, Content, Option, Group],
       synchronize: false,
       logging: true,
@@ -30,9 +32,7 @@ import { MsgBrokerService } from './submodules/backend-social-1.0-rmq/src/module
         name: 'GROUP_SERVICE_QUEUE',
         transport: Transport.RMQ,
         options: {
-          urls: [
-            'amqps://yscfodyg:cDk7kIHZOqn5qXqRYtmlHVwvC_2fQtb9@puffin.rmq2.cloudamqp.com/yscfodyg',
-          ],
+          urls: [process.env.RMQ_URL],
           queue: queues.GROUP_SERVICE_QUEUE,
           queueOptions: {
             durable: true,

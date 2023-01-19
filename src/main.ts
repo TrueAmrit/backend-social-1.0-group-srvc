@@ -8,9 +8,7 @@ async function bootstrap() {
   app.connectMicroservice({
     transport: Transport.RMQ,
     options: {
-      urls: [
-        'amqps://yscfodyg:cDk7kIHZOqn5qXqRYtmlHVwvC_2fQtb9@puffin.rmq2.cloudamqp.com/yscfodyg',
-      ],
+      urls: [process.env.RMQ_URL],
       queue: queues.GROUP_SERVICE_QUEUE,
       queueOptions: {
         durable: true,
