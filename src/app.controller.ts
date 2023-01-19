@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { AppService } from './app.service';
 import { GroupDto } from './submodules/backend-social-1.0-dtos/src/dtos/group.dto';
 

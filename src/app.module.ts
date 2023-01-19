@@ -21,7 +21,7 @@ import { MsgBrokerService } from './submodules/backend-social-1.0-rmq/src/module
       password: 'XOMjT6aq3Ibp',
       database: 'neondb',
       entities: [User, Content, Option, Group],
-      synchronize: true,
+      synchronize: false,
       logging: true,
       ssl: true,
     }),
